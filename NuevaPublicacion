@@ -1,0 +1,48 @@
+<?PHP
+$hostname_localhost="localhost";
+$database_localhost="reunitebd";
+$username_localhost="root";
+$password_localhost="";
+
+$conexion=mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
+
+	$user = $_POST["user"];
+	$titulo = $_POST["titulo"];
+	$descripcion = $_POST["descripcion"];
+	$contacto = $_POST["contacto"];
+	$imagen = $_POST["imagen"];
+	
+	$consulta="SELECT max(Pub_ID) FROM publicacion WHERE Usuario_ID = '{$user}'";
+	$resultado=mysqli_query($conexion,$consulta);
+	
+	if($registro=mysqli_fetch_array($resultado)){
+		$maximoencontrado = $registro['Pub_ID'];
+		$resultar["success"]=1;
+		$resultar["message"]='maximo';
+		$json['registro'][]=$resultar;
+		echo json_encode($json);
+		mysqli_close($conexion);
+	}
+	//$nombreImg = 
+
+	$path = "PubImg/$titulo.jpg";
+
+	//$url = "http://$hostname_localhost/Reunite/$path";
+	$url = "imagenes/".$titulo.".jpg";
+
+	file_put_contents($path,base64_decode($imagen));
+	$bytesArchivo=file_get_contents($path);
+
+	//$sql="INSERT INTO usuario VALUES (?,?,?,?,?)";
+	//$stm=$conexion->prepare($sql);
+	//$stm->bind_param('issss',$user,$titulo,$descripcion,$bytesArchivo,$url);
+		
+	if($stm->execute()){
+		echo "registra";
+	}else{
+		echo "noRegistra";
+	}
+	
+	mysqli_close($conexion);
+?>
+© 2020 GitHub, Inc.
