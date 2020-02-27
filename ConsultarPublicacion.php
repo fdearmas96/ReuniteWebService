@@ -18,7 +18,7 @@ $json=array();
 			$result["Pub_ID"]=$registro['Pub_ID'];
 			$result["Pub_Titulo"]=$registro['Pub_Titulo'];
 			$result["Pub_Desc"]=$registro['Pub_Desc'];
-			$result["Pub_img"]=base64_encode($registro['Pub_img']);
+			$result["Pub_img"]=$registro['Pub_img']);//base64_encode($registro['Pub_img']);
 			$result["Pub_Contacto"]=$registro['Pub_Contacto']; 
 			$json['publicacion'][]=$result;
 		}else{			
