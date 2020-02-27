@@ -39,7 +39,7 @@ $conexion=mysqli_connect($hostname_localhost,$username_localhost,$password_local
 	}
 	$path = "Imagenes/".$nombreImg.".jpg";
 
-	$url = "http://$hostname_localhost".":8080"."/Reunite/$path";
+	$url = $path;//"http://$hostname_localhost".":8080"."/Reunite/$path";
 	
 
 	file_put_contents($path,base64_decode($imagen));
