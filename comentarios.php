@@ -17,7 +17,7 @@ require('conexionSql.php');
             $usuario        = $_GET["usuario"];
             //Consigo el último Id del mensaje
             $resultado_id = 0;
-            $select_id = "Select * from comentario where Pub_ID  =  {$publicacion} order by comentario_id desc";//si uso el max me tira un error
+            $select_id = "Select * from Comentario where Pub_ID  =  {$publicacion} order by comentario_id desc";//si uso el max me tira un error
             $resultado_id1 = $conexion->query($select_id);
 
             if($registro=$resultado_id1->fetch_array()){
@@ -25,10 +25,10 @@ require('conexionSql.php');
             }
             $resultado_id +=1;
 
-            $insert_comentario = "insert into comentario (comentario_Id, Pub_ID, comentario_body, Usuario_ID)
+            $insert_comentario = "insert into Comentario (comentario_Id, Pub_ID, comentario_body, Usuario_ID)
                                                 values({$resultado_id},{$publicacion},'{$comentario}','{$usuario}')";
             $insert_resultado =$conexion->query($insert_comentario);
-            $resulta["success"]=$resultado_id ;//No vino el comentario
+            $resulta["success"]=0 ;//No vino el comentario
             //$resulta["descripcion"]=$insert_comentario;
             $json['comentario'][]=$resulta;
             echo json_encode($json);
@@ -37,23 +37,25 @@ require('conexionSql.php');
         }else{
 
             if($accion == "DSP"){
-                    $select_comentarios = "Select * from comentario where Pub_ID  =  {$publicacion} order by comentario_id";
+                    $select_comentarios = "Select * from Comentario where Pub_ID  =  {$publicacion} order by comentario_id";
                     $resultado = $conexion->query($select_comentarios);
 
                     if ($resultado->num_rows > 0) {
                         while($registro = $resultado->fetch_assoc()) {
-                
+                        $result["success"]=0;
                         $result["Pub_ID"]=$registro['Pub_ID'];
                         $result["comentario_Id"]=$registro['comentario_Id'];
                         $result["comentario_body"]=$registro['comentario_body'];                   
-                        $result["comentario_Id"]=$registro['comentario_Id'];
+                        $result["Usuario_ID"]=$registro['Usuario_ID'];
                         
                         
-                        $json['comentarios'][]=$result;
+                        $json['comentario'][]=$result;
                         //echo json_encode($json);
                         }
                     } else {
-                        echo "0 results";
+                        $result["Comentario"]="no hay comentario".$select_comentarios;
+                        $json['comentario'][]=$result;
+                        
                     }
                     echo json_encode($json);
             }else{
