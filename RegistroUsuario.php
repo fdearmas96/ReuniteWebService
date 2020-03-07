@@ -1,8 +1,9 @@
 <?PHP
-$hostname_localhost ="localhost";
+/*$hostname_localhost ="localhost";
 $database_localhost ="reunitebd";
 $username_localhost ="root";
-$password_localhost ="";
+$password_localhost ="";*/
+require('conexionSql.php');
 
 $json=array();
 //http://localhost:8080/Reunite/RegistroUsuario.php?usuario=fer1&pass=root1&usuario_nombre=Fernando&usuario_apellido=De%20Armas&usuario_correo=ejemplo@gmail.com
@@ -14,13 +15,14 @@ $json=array();
 		$usuario_correo   = $_GET['usuario_correo'];
 		
 		
-		$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
+		//$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
 		
 		//Veo si ya no existe el usuario:
 		$consulta="SELECT * FROM usuario WHERE Usuario_ID = '{$usuario}'";
-		$resultado=mysqli_query($conexion,$consulta);
+		//$resultado=mysqli_query($conexion,$consulta);
+		$resultado=$conexion->query($consulta);
 		
-		if($registro=mysqli_fetch_array($resultado)){
+		if($registro=$resultado->fetch_array()){
 			$resultar["success"]=1;
 			$resultar["message"]='Usuario  ya existe, intente otro';
 			$json['registro'][]=$resultar;
@@ -31,13 +33,13 @@ $json=array();
 					
 			$insert="INSERT INTO usuario(Usuario_ID, Usuario_Pass,usuario_nombre, usuario_apellido, usuario_correo) 
 			VALUES ('{$usuario}','{$pass}','{$usuario_nombre}','{$usuario_apellido}','{$usuario_correo}')";
-			$resultado_insert=mysqli_query($conexion,$insert);
+			$resultado_insert=$conexion->query($insert);
 			
 			if($resultado_insert){
 				$consulta="SELECT * FROM usuario WHERE Usuario_ID = '{$usuario}'";
-				$resultado=mysqli_query($conexion,$consulta);
+				$resultado=-$conexion->query($consulta);
 				
-				if($registro=mysqli_fetch_array($resultado)){
+				if($registro=$resultado->fetch_array()){
 					$resultar["success"]=0;
 					$resultar["message"]='Usuario creado correctamente';
 					$json['registro'][]=$resultar;

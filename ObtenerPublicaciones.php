@@ -1,8 +1,10 @@
 <?PHP
-$hostname_localhost ="localhost";
+/*$hostname_localhost ="localhost";
 $database_localhost ="reunitebd";
 $username_localhost ="root";
-$password_localhost ="";
+$password_localhost ="";*/
+
+require('conexionSql.php');
 
 // Función para debuggear
 function console_log( $data ){
@@ -13,7 +15,7 @@ function console_log( $data ){
 
 $json=array();
 				
-	$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
+	//$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
 	
 	if ($conexion->connect_error) {
 		die("Conexión fallida: " . $conexion->connect_error);

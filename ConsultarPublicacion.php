@@ -1,21 +1,19 @@
-<?PHP
-$hostname_localhost ="localhost";
-$database_localhost ="reunitebd";
-$username_localhost ="root";
-$password_localhost ="";
+<?php
+
+require('conexionSql.php');
 
 $json=array();
 
 	if(isset($_GET["Pub_ID"])){
-		$Pub_ID=$_GET["Pub_ID"];
+		$Pub_ID=$_GET["Pub_ID"];	
 				
-		$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
+
 
 		//$consulta="select Pub_ID, Pub_Titulo, Pub_Desc, Pub_fecha, Pub_img, Pub_Contacto from publicacion where Pub_ID= '{$Pub_ID}'";
 		$consulta="select * from publicacion where Pub_ID= '{$Pub_ID}'";
-		$resultado=mysqli_query($conexion,$consulta);
+		$resultado=$conexion->query($consulta);
 			
-		if($registro=mysqli_fetch_array($resultado)){
+		if($registro=$resultado->fetch_array()){
 			$result["Pub_ID"]=$registro['Pub_ID'];
 			$result["Pub_Titulo"]=$registro['Pub_Titulo'];
 			$result["Pub_Desc"]=$registro['Pub_Desc'];
