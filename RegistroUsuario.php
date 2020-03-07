@@ -37,7 +37,7 @@ $json=array();
 			
 			if($resultado_insert){
 				$consulta="SELECT * FROM usuario WHERE Usuario_ID = '{$usuario}'";
-				$resultado=-$conexion->query($consulta);
+				$resultado=$conexion->query($consulta);
 				
 				if($registro=$resultado->fetch_array()){
 					$resultar["success"]=0;

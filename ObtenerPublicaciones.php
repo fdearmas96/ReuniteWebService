@@ -20,8 +20,13 @@ $json=array();
 	if ($conexion->connect_error) {
 		die("Conexión fallida: " . $conexion->connect_error);
 	}
-
-	$consulta="select Pub_ID, Pub_Titulo, Pub_Desc, Pub_img, Pub_Contacto from publicacion";
+	if($_GET["usuario"]!=null){
+		$usuario=$_GET["usuario"];	
+		$consulta="select Pub_ID, Pub_Titulo, Pub_Desc, Pub_img, Pub_Contacto from publicacion where Usuario_ID = '{$usuario}'";}
+	else{
+		$consulta="select Pub_ID, Pub_Titulo, Pub_Desc, Pub_img, Pub_Contacto from publicacion";	
+	}
+	//$consulta="select Pub_ID, Pub_Titulo, Pub_Desc, Pub_img, Pub_Contacto from publicacion";
 	$resultado= $conexion->query($consulta); // mysqli_query($conexion,$consulta);
 	
 	if ($resultado->num_rows > 0) {

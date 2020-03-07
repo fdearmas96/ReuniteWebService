@@ -1,23 +1,26 @@
 <?PHP
+/*
 $hostname_localhost ="localhost";
 $database_localhost ="reunitebd";
 $username_localhost ="root";
 $password_localhost ="";
-
+*/
+require('conexionSql.php');
 $json=array();
 
 	if(isset($_GET["usuario"]) && isset($_GET["pass"])){
 		$usuario= $_GET['usuario'];
 		$pass=    $_GET['pass'];	
-		$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
+		//$conexion = mysqli_connect($hostname_localhost,$username_localhost,$password_localhost,$database_localhost);
 		
 		//Veo si ya no existe el usuario:
 		$consulta="SELECT Usuario_ID, Usuario_Pass FROM usuario WHERE Usuario_ID = '{$usuario}'";
-		$resultado=mysqli_query($conexion,$consulta);
+		//$resultado=mysqli_query($conexion,$consulta);
+		$resultado=$conexion->query($consulta);
 		
 
 		
-		if($registro=mysqli_fetch_array($resultado)){
+		if($registro=$resultado->fetch_array()){
 			$contraseñaTabla = $registro['Usuario_Pass'];
 			$usuarioTabla    = $registro['Usuario_ID'];
 			if($contraseñaTabla==$pass){  //contraseña correcta
