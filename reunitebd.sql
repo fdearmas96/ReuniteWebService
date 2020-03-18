@@ -38,6 +38,29 @@ CREATE TABLE `publicacion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `mensajes`
+--
+
+CREATE TABLE `mensajes` (
+  `Msg_ID` int(20) NOT NULL COMMENT 'ID Mensaje',
+  `Msg_Mensaje` varchar(500) NOT NULL COMMENT 'Mensaje',
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `msguser`
+--
+
+CREATE TABLE `msguser` (
+  `Msg_ID` int(20) NOT NULL COMMENT 'ID Mensaje',
+  `Usuario_ID1` varchar(15) NOT NULL COMMENT 'Usuario send',
+  `Usuario_ID2` varchar(15) NOT NULL COMMENT 'Usuario receive',
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `userpub`
 --
 
@@ -92,6 +115,18 @@ ALTER TABLE `userpub`
 --
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`Usuario_ID`);
+
+--
+-- Indices de la tabla `mensajes`
+--
+ALTER TABLE `mensajes`
+  ADD PRIMARY KEY (`Msg_ID`);
+
+--
+-- Indices de la tabla `mensajes`
+--
+ALTER TABLE `msguser`
+  ADD PRIMARY KEY (`Msg_ID`,`Usuario_ID1`,`Usuario_ID2`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
