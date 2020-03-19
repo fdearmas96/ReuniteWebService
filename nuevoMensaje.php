@@ -23,7 +23,7 @@
     VALUES ('{$maximoencontrado}', '{$usersend}', '{$userreceive}')";
     $resultado_insert = $conexion->query($sqlinsert);
     
-    $sqlselect = "Select * from publicacion where Pub_Id = '{$maximoencontrado}'";
+    $sqlselect = "Select * from mensajes where Msg_ID = '{$maximoencontrado}'";
     $resultado = $conexion->query($sqlselect);
     
 	if($registro = $resultado->fetch_array()) {

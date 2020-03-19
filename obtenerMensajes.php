@@ -34,7 +34,8 @@
 			$json['mensajes'][] = $result;
 		}
 	} else {
-		echo "0 results";
+		$result["mensaje"][] = 'No hay mensajes';
+		$json['mensajes'][] = $result;
 	}
 	
 	mysqli_close($conexion);
