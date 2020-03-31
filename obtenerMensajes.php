@@ -16,7 +16,7 @@
 
 	if($_GET["usuario"] != null){
 		$usuario = $_GET["usuario"];	
-		$consulta = "select mensajes.Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID where Usuario_ID1 = '{$usuario}'";
+		$consulta = "select mensajes.Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID where Usuario_ID1 = '{$usuario}' or Usuario_ID2 = '{$usuario}'";
 	} else {
 		$consulta = "select mensajes.Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID";	
 	}
