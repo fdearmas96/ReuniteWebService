@@ -12,13 +12,13 @@
 
 	if ($conexion->connect_error) {
 		die("Conexión fallida: " . $conexion->connect_error);
-	}
+	} 
 
 	if($_GET["usuario"] != null){
 		$usuario = $_GET["usuario"];	
-		$consulta = "select Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID where Usuario_ID2 = '{$usuario}'";
+		$consulta = "select mensajes.Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID where Usuario_ID1 = '{$usuario}'";
 	} else {
-		$consulta = "select Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID";	
+		$consulta = "select mensajes.Msg_ID, Msg_Mensaje, Usuario_ID1, Usuario_ID2 from mensajes inner join msguser on mensajes.Msg_ID = msguser.Msg_ID";	
 	}
 
 	$resultado = $conexion->query($consulta);
